@@ -1,0 +1,7 @@
+---
+- hosts: '{{ host }}'
+  gather_facts: false
+  tasks:
+    - include_role:
+        name: vim
+        tasks_from: vim_settings

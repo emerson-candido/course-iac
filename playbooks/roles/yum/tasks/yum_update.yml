@@ -1,0 +1,6 @@
+---
+- name: Install yum package
+  yum:
+    name: '*'
+    state: latest
+  become: yes

@@ -1,0 +1,30 @@
+---
+- name: Set properly DNS settings
+  block:
+  - name: Remove existing DNS server settings
+    lineinfile:
+      path: /etc/resolv.conf
+      state: absent
+      regexp: '^nameserver'
+    become: yes
+  
+  - name: ADD properly DNS server
+    lineinfile:
+      path: /etc/resolv.conf
+      line: 'nameserver {{ dnsserver }}'
+    become: yes
+
+  - name: Remove exiting suffix
+    lineinfile:
+      path: /etc/resolv.conf
+      state: absent
+      regexp: '^search'
+    become: yes
+
+  - name: ADD properly suffix
+    lineinfile:
+      path: /etc/resolv.conf
+      line: 'search {{ dnssuffix }}'
+    become: yes
+  when: dnsserver is defined and
+        dnssuffix is defined

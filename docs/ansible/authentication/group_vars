@@ -1,0 +1,17 @@
+ANSIBLE - AUTHENTICATION
+
+GROUP_VARS 
+
+This document covers the following items:
+  1 Understanding group_vars
+  2 Set the authentication user
+
+1 Understanding group_vars 
+  The group_vars directory is designed to set specific variables that can be used as standard for all playbooks.
+
+2 Set the authentication user
+  In order to allow the user iac to run playbooks on remote hosts, the following line was added into the file gorup_vars/all
+  ansible_ssh_user: svc_ansible
+
+References:  
+https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html

@@ -1,0 +1,86 @@
+---
+- name: Bootstrap a machine for IaC environment
+  block:
+  - name: Add IaC user as member of wheel group
+    include_role:
+      name: groups
+      tasks_from: groups_addmember
+    vars:
+      user: iac
+      group: wheel
+    
+  - name: Set properly DNS server and suffix
+    include_role:
+      name: dns
+      tasks_from: dns_resolvconf
+    vars:
+      dnsserver: 192.168.56.10
+      dnssuffix: iac.local
+
+  - name: Set proxy for yum
+    include_role:
+      name: yum
+      tasks_from: yum_proxy
+    vars:
+      proxyname: proxy.iac.local 
+      proxyport: 3128
+
+  - name: Update the server
+    include_role:
+      name: yum
+      tasks_from: yum_update
+    
+  - name: Install epel-release
+    include_role:
+      name: yum
+      tasks_from: yum_install
+    vars:
+      yumpackage: epel-release
+
+  - name: Install telnet
+    include_role:
+      name: yum
+      tasks_from: yum_install
+    vars:
+      yumpackage: telnet
+
+  - name: Install bind-utils
+    include_role:
+      name: yum
+      tasks_from: yum_install
+    vars:
+      yumpackage: bind-utils
+
+  - name: Install net-tools
+    include_role:
+      name: yum
+      tasks_from: yum_install
+    vars:
+      yumpackage: net-tools
+
+  - name: Install tmux
+    include_role:
+      name: yum
+      tasks_from: yum_install
+    vars:
+      yumpackage: tmux
+
+  - name: Install vim
+    include_role:
+      name: yum
+      tasks_from: yum_install
+    vars:
+      yumpackage: vim
+
+  - name: Set proxy profile
+    include_role:
+      name: profile
+      tasks_from: profile_proxy
+    vars:
+      proxyname: proxy.iac.local 
+      proxyport: 3128
+  
+  - name: Set vim settings
+    include_role:
+      name: vim
+      tasks_from: vim_settings

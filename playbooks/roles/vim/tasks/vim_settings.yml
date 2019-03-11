@@ -1,0 +1,21 @@
+---
+- name: set expandtab
+  lineinfile:
+    path: /etc/vimrc
+    line: 'set expandtab'
+  become: yes
+
+
+- name: set tabstop
+  lineinfile:
+    path: /etc/vimrc
+    line: 'set tabstop=2'
+  become: yes
+
+
+- name: set color
+  lineinfile:
+    path: /etc/vimrc
+    line: 'color desert'
+  become: yes
+

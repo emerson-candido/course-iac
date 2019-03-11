@@ -1,0 +1,9 @@
+---
+- name: Add users to group
+  user:
+    name: '{{ user }}'
+    groups: '{{ group }}'
+    append: yes
+  become: yes
+  when: user is defined and
+        group is defined

@@ -1,0 +1,30 @@
+---
+- name: Set proxy to all users
+  block:
+  - name: Remove existing proxy settings http
+    lineinfile:
+      path: /etc/profile
+      regexp: '^http_proxy'
+      state: absent
+    become: yes
+
+  - name: Remove existing proxy settings https
+    lineinfile:
+      path: /etc/profile
+      regexp: '^https_proxy'
+      state: absent
+    become: yes
+
+  - name: Set Proxy http
+    lineinfile:
+      path: /etc/profile
+      line: 'export http_proxy=http://{{ proxyname }}:{{ proxyport }}'
+    become: yes
+  
+  - name: Set Proxy https
+    lineinfile:
+      path: /etc/profile
+      line: 'export https_proxy=http://{{ proxyname }}:{{ proxyport }}'
+    become: yes
+  when: proxyname is defined and
+        proxyport is defined

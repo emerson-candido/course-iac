@@ -1,0 +1,7 @@
+---
+- hosts: '{{ host }}'
+  gather_facts: false
+  tasks:
+    - include_role:
+        name: yum
+        tasks_from: yum_update

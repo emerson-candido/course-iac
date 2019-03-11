@@ -1,0 +1,7 @@
+---
+- name: Install yum package
+  yum:
+    name: '{{ yumpackage }}'
+    state: installed
+  become: yes
+  when: yumpackage is defined

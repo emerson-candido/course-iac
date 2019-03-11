@@ -1,0 +1,8 @@
+---
+- name:
+  lineinfile:
+    path: /etc/yum.conf
+    line: 'proxy=http://{{ proxyname }}:{{ proxyport }}'
+  become: yes
+  when: proxyname is defined and
+        proxyport is defined
