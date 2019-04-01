@@ -10,3 +10,5 @@ Você foi solicitado para auxiliar um desenvolvedor na disponibilização da inf
 A aplicação consiste nos seguintes itens:
 	- Uma aplicação WEB que foi criada em Python Flask 
 	- Os requerimentos estão disponíveis em "APP\requirements.txt
+
+Encontre a melhor solução
