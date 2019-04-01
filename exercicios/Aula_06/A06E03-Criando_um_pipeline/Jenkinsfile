@@ -1,0 +1,26 @@
+pipeline { 
+  agent any
+  
+  stages {
+    stage('Clona o repositório'){
+      steps{
+        sh 'if [ -d course-iac ]; then rm -rf course-iac; fi'
+        sh 'git config --global http.proxy http://proxy.iac.local:3128'
+        sh 'git clone https://github.com/emerson-candido/course-iac.git'
+      }
+    }
+    
+    stage('Build imagem web01'){
+      steps{
+        sh 'docker build -t web01 course-iac/exercicios/Aula_06/A06E03-Criando_um_pipeline/'
+      }
+    }
+    
+    stage('Executa o container'){
+      steps{
+        sh 'containerid=$(docker container ps --filter "name=web01"  --format "{{.ID}}") && if [ ! -z $containerid ]; then docker container rm -f $containerid; fi'
+        sh 'docker container run -d --name web01 -p 80:80  web01'  
+      } 
+    }
+  }
+}
